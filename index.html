@@ -276,7 +276,11 @@ table.t td:nth-child(n+3){color:var(--ink2)}
 .next ol{list-style:none;padding:0;margin-top:40px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;counter-reset:n;position:relative;z-index:1}
 .next li{counter-increment:n;background:rgba(255,255,255,.14);border-radius:var(--r2);padding:22px;font-size:17px;line-height:1.45}
 .next li::before{content:counter(n);display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#fff;color:var(--green-d);font-weight:600;margin-bottom:16px}
-footer{padding:40px 0 56px;font-size:15px;color:var(--muted);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer{padding:56px 0 64px;display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
+footer .by{display:flex;flex-direction:column;gap:14px;font-size:15px;color:var(--muted)}
+footer .by img{display:block;width:clamp(150px,16vw,200px);height:auto}
+footer .meta{display:flex;flex-direction:column;gap:4px;font-size:15px;color:var(--muted);text-align:right}
+@media (max-width:640px){footer{flex-direction:column;align-items:flex-start}footer .meta{text-align:left}}
 
 /* reveal: одна тихая анимация появления для блоков */
 .rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
@@ -638,7 +642,10 @@ footer{padding:40px 0 56px;font-size:15px;color:var(--muted);display:flex;justif
       <li>После первого платежа провести стартовую встречу и зафиксировать календарный план.</li>
     </ol>
   </div>
-  <footer><span>Коммерческое предложение для АрбузФуд, 20 ноября 2026</span><span>Стоимость в тенге, без учёта серверов, лицензий и внешних сервисов</span></footer>
+  <footer>
+    <div class="by"><span>Подготовлено</span><img src="assets/kazdata-logo.svg" alt="KazData Solutions" width="959" height="613"></div>
+    <div class="meta"><span>Коммерческое предложение для АрбузФуд, 20 ноября 2026</span><span>Стоимость в тенге, без учёта серверов, лицензий и внешних сервисов</span></div>
+  </footer>
 </section>
 </main>
 
