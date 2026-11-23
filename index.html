@@ -60,6 +60,12 @@ section{padding:clamp(64px,9vw,128px) 0 0}
 .nav a:hover,.nav a.on{background:var(--dark2);color:#fff}
 .nav a.cta{background:var(--green);color:#fff}
 .nav a.cta:hover{background:var(--green-d)}
+.mbtn-menu{display:none;margin-left:auto;align-items:center;gap:10px;min-height:44px;padding:0 6px 0 18px;border:0;border-radius:999px;background:var(--dark2);color:#fff;font:inherit;font-size:15px;cursor:pointer}
+.mbtn-menu i{position:relative;width:32px;height:32px;border-radius:50%;background:var(--green)}
+.mbtn-menu i::before,.mbtn-menu i::after{content:"";position:absolute;left:9px;width:14px;height:2px;border-radius:1px;background:#fff;transition:transform .25s}
+.mbtn-menu i::before{top:12px}.mbtn-menu i::after{top:18px}
+.bar.open .mbtn-menu i::before{transform:translateY(3px) rotate(45deg)}
+.bar.open .mbtn-menu i::after{transform:translateY(-3px) rotate(-45deg)}
 
 /* hero */
 .hero{padding-top:clamp(48px,7vw,96px)}
@@ -302,15 +308,18 @@ footer .meta{display:flex;flex-direction:column;gap:4px;font-size:15px;color:var
   .sh .rule{display:none}
   .panel{position:static;margin:0 0 8px;border-radius:var(--r2)}
   .budget>.card:first-child{position:static}
-  .bar{padding-left:16px}
+  .bar{padding-left:16px;position:relative}
+  .mbtn-menu{display:inline-flex}
+  .nav{position:absolute;left:0;right:0;top:calc(100% + 8px);display:grid;justify-content:stretch;gap:2px;padding:10px;background:var(--dark);border-radius:24px;box-shadow:0 24px 48px -16px rgba(31,33,41,.55);max-height:calc(100vh - 110px);max-height:calc(100dvh - 110px);overflow-y:auto;overflow-x:hidden;opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .2s,transform .2s,visibility 0s .2s}
+  .bar.open .nav{opacity:1;visibility:visible;transform:none;transition:opacity .2s,transform .2s}
+  .nav a{font-size:18px;padding:14px 18px;border-radius:16px}
+  .nav a.cta{margin-top:6px;text-align:center}
   .logo svg{height:26px}
 }
 @media (max-width:640px){
   body{font-size:17px}
   .top{top:8px;margin-top:8px}
   .bar{gap:10px}
-  .nav a{font-size:14px;padding:9px 12px}
-  .nav a:not(.cta){display:none}
   .chip{padding:10px 4px;font-size:13px}
   .users{flex-wrap:wrap;row-gap:10px}
   .users .chip{flex:1 1 calc(50% - 5px)}
@@ -363,7 +372,8 @@ footer .meta{display:flex;flex-direction:column;gap:4px;font-size:15px;color:var
       <svg viewBox="0 0 205 149" aria-hidden="true" style="height:32px;width:44px"><use href="#logo-melon" width="205" height="149"/></svg>
       <svg viewBox="0 0 282 76" aria-hidden="true" style="height:18px;width:67px;color:#fff"><use href="#logo-word" width="282" height="76"/></svg>
     </a>
-    <nav class="nav" aria-label="Разделы">
+    <button type="button" class="mbtn-menu" id="menuBtn" aria-expanded="false" aria-controls="nav"><span>Меню</span><i aria-hidden="true"></i></button>
+    <nav class="nav" id="nav" aria-label="Разделы">
       <a href="#goals">Задачи</a>
       <a href="#scope">Состав работ</a>
       <a href="#budget">Бюджет</a>
@@ -879,6 +889,15 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return
 }),{threshold:.15,rootMargin:'0px 0px -8% 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 countUp($('[data-count]'));
+
+/* ---------- mobile menu ---------- */
+const bar=$('.bar'),menuBtn=$('#menuBtn');
+const setMenu=open=>{bar.classList.toggle('open',open);menuBtn.setAttribute('aria-expanded',open);menuBtn.querySelector('span').textContent=open?'Закрыть':'Меню'};
+menuBtn.addEventListener('click',()=>setMenu(!bar.classList.contains('open')));
+$('#nav').addEventListener('click',e=>{if(e.target.closest('a'))setMenu(false)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&bar.classList.contains('open')){setMenu(false);menuBtn.focus()}});
+document.addEventListener('click',e=>{if(bar.classList.contains('open')&&!bar.contains(e.target))setMenu(false)});
+narrow.addEventListener('change',e=>{if(!e.matches)setMenu(false)});
 
 /* ---------- active nav ---------- */
 const links=[...document.querySelectorAll('.nav a')];
