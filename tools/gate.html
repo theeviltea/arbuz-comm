@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>АрбузФуд — B2B платформа</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+@font-face{font-family:Onest;font-weight:400;font-display:swap;src:url(assets/fonts/onest-cyrillic-400-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Onest;font-weight:400;font-display:swap;src:url(assets/fonts/onest-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+2212}
+@font-face{font-family:Onest;font-weight:500;font-display:swap;src:url(assets/fonts/onest-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Onest;font-weight:500;font-display:swap;src:url(assets/fonts/onest-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+2212}
+:root{color-scheme:light;--page:#F2F3F5;--ink:#1F2129;--ink2:#4A4656;--muted:#7C7987;--line:#E3E4E8;--dark:#1F2129;--green:#1FA551;--green-d:#168543;--err:#D33A55}
+*{box-sizing:border-box;min-width:0}
+html,body{height:100%}
+body{margin:0;background:var(--page);color:var(--ink);font:17px/1.55 Onest,Gilroy,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;display:grid;grid-template-rows:1fr auto;min-height:100vh;min-height:100dvh}
+main{display:grid;place-items:center;padding:clamp(24px,6vw,64px) 16px}
+.card{width:min(460px,100%);background:#fff;border-radius:30px;padding:clamp(28px,5vw,44px);box-shadow:0 30px 60px -40px rgba(31,33,41,.35);animation:in .6s cubic-bezier(.2,.7,.2,1) both}
+@keyframes in{from{opacity:0;transform:translateY(16px)}}
+.slice{display:block;width:132px;height:auto;margin:0 0 26px}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--ink2);background:var(--page);border-radius:999px;padding:6px 14px 6px 10px}
+.tag svg{width:16px;height:16px}
+h1{font-weight:500;font-size:clamp(28px,6vw,36px);line-height:1.08;letter-spacing:-.025em;margin:16px 0 12px;text-wrap:balance}
+p{margin:0;color:var(--ink2);font-size:16px}
+form{margin-top:28px;display:grid;gap:14px}
+label{font-size:14px;color:var(--muted)}
+.field{position:relative}
+input[type=password],input[type=text]{width:100%;height:56px;border:1.5px solid var(--line);border-radius:16px;padding:0 56px 0 18px;font:inherit;font-size:17px;color:var(--ink);background:#fff;transition:border-color .2s,box-shadow .2s}
+input:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 4px rgba(31,165,81,.15)}
+.bad input{border-color:var(--err);box-shadow:0 0 0 4px rgba(211,58,85,.12)}
+.eye{position:absolute;right:6px;top:6px;width:44px;height:44px;border:0;border-radius:12px;background:none;cursor:pointer;display:grid;place-items:center;color:var(--muted)}
+.eye:hover{background:var(--page);color:var(--ink)}
+.eye svg{width:22px;height:22px}
+.err{min-height:22px;font-size:14px;color:var(--err)}
+.row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.remember{display:inline-flex;align-items:center;gap:10px;font-size:15px;color:var(--ink2);cursor:pointer;min-height:44px}
+.remember input{width:20px;height:20px;accent-color:var(--green);margin:0}
+.btn{display:inline-flex;align-items:center;gap:14px;min-height:56px;padding:8px 8px 8px 26px;border:0;border-radius:999px;background:var(--green);color:#fff;font:inherit;font-size:17px;font-weight:500;cursor:pointer;transition:background .2s}
+.btn:hover{background:var(--green-d)}
+.btn i{width:40px;height:40px;border-radius:50%;background:#fff;display:grid;place-items:center}
+.btn i svg{width:16px;height:16px;stroke:var(--green);transition:transform .25s}
+.btn:hover i svg{transform:translateX(3px)}
+.btn[disabled]{opacity:.7;cursor:progress}
+.btn[disabled] i svg{animation:spin 1s linear infinite;stroke-dasharray:20 40}
+@keyframes spin{to{transform:rotate(360deg)}}
+.shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+footer{display:flex;align-items:center;justify-content:center;gap:14px;padding:0 16px 32px;font-size:14px;color:var(--muted)}
+footer img{width:96px;height:auto;display:block}
+noscript{display:block;margin-top:20px;font-size:15px;color:var(--err)}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+  <div class="card" id="card">
+    <svg class="slice" viewBox="0 0 264 140" aria-hidden="true">
+      <path d="M2 2h260a130 130 0 0 1-260 0z" fill="#189B48"/>
+      <path d="M10 2h244a122 122 0 0 1-244 0z" fill="#9FCF8A"/>
+      <path d="M16 2h232a116 116 0 0 1-232 0z" fill="#EE5972"/>
+      <g fill="#2B2230">
+        <path d="M70 40c3 4 4 9 0 12c-4-3-3-8 0-12z"/><path d="M104 62c3 4 4 9 0 12c-4-3-3-8 0-12z"/><path d="M132 72c3 4 4 9 0 12c-4-3-3-8 0-12z"/><path d="M160 62c3 4 4 9 0 12c-4-3-3-8 0-12z"/><path d="M194 40c3 4 4 9 0 12c-4-3-3-8 0-12z"/><path d="M118 30c3 4 4 9 0 12c-4-3-3-8 0-12z"/><path d="M146 30c3 4 4 9 0 12c-4-3-3-8 0-12z"/>
+      </g>
+    </svg>
+    <span class="tag"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>Страница не публичная</span>
+    <h1>Коммерческое предложение для АрбузФуд</h1>
+    <p>Доступ только по паролю. Введите пароль, который вы получили вместе со ссылкой.</p>
+    <form id="form" novalidate>
+      <label for="pw">Пароль</label>
+      <div class="field" id="field">
+        <input type="password" id="pw" name="password" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" required autofocus aria-describedby="err">
+        <button type="button" class="eye" id="eye" aria-label="Показать пароль" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+      </div>
+      <div class="err" id="err" role="alert"></div>
+      <div class="row">
+        <label class="remember"><input type="checkbox" id="remember" checked>Запомнить на этом устройстве</label>
+        <button class="btn" id="go" type="submit">Открыть <i><svg viewBox="0 0 16 16"><path d="M2 8h11M9 3.5 13.5 8 9 12.5" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></button>
+      </div>
+    </form>
+    <noscript>Чтобы открыть предложение, включите JavaScript в браузере.</noscript>
+  </div>
+</main>
+<footer><span>Подготовлено</span><img src="assets/kazdata-logo.svg" alt="KazData Solutions" width="959" height="613"></footer>
+
+<script type="application/json" id="payload">/*PAYLOAD*/</script>
+<script>
+(function(){
+  var KEY='arbuz-kp-key';
+  var P=JSON.parse(document.getElementById('payload').textContent);
+  var form=document.getElementById('form'),pw=document.getElementById('pw'),err=document.getElementById('err'),
+      field=document.getElementById('field'),go=document.getElementById('go'),card=document.getElementById('card'),
+      eye=document.getElementById('eye'),remember=document.getElementById('remember');
+  var b64=function(s){var b=atob(s),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u};
+  var toB64=function(buf){var u=new Uint8Array(buf),s='';for(var i=0;i<u.length;i++)s+=String.fromCharCode(u[i]);return btoa(s)};
+  var store={get:function(){try{return localStorage.getItem(KEY)}catch(e){return null}},
+             set:function(v){try{localStorage.setItem(KEY,v)}catch(e){}},
+             del:function(){try{localStorage.removeItem(KEY)}catch(e){}}};
+
+  function derive(password){
+    return crypto.subtle.importKey('raw',new TextEncoder().encode(password),'PBKDF2',false,['deriveBits'])
+      .then(function(base){return crypto.subtle.deriveBits({name:'PBKDF2',salt:b64(P.salt),iterations:P.iter,hash:'SHA-256'},base,256)});
+  }
+  function decrypt(raw){
+    return crypto.subtle.importKey('raw',raw,'AES-GCM',false,['decrypt'])
+      .then(function(k){return crypto.subtle.decrypt({name:'AES-GCM',iv:b64(P.iv)},k,b64(P.data))})
+      .then(function(buf){return new TextDecoder().decode(buf)});
+  }
+  function show(html){
+    var hash=location.hash;
+    document.open();document.write(html);document.close();
+    if(hash){setTimeout(function(){var el=document.getElementById(hash.slice(1));if(el)el.scrollIntoView()},150)}
+  }
+
+  if(!window.crypto||!crypto.subtle){err.textContent='Браузер не поддерживает расшифровку. Откройте ссылку в актуальной версии Chrome, Safari или Firefox.';go.disabled=true;return}
+
+  var saved=store.get();
+  if(saved){decrypt(b64(saved)).then(show,function(){store.del()})}
+
+  eye.addEventListener('click',function(){var on=pw.type==='password';pw.type=on?'text':'password';
+    eye.setAttribute('aria-pressed',on);eye.setAttribute('aria-label',on?'Скрыть пароль':'Показать пароль');pw.focus()});
+  pw.addEventListener('input',function(){field.classList.remove('bad');err.textContent=''});
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!pw.value){err.textContent='Введите пароль.';pw.focus();return}
+    go.disabled=true;err.textContent='';
+    var raw;
+    derive(pw.value).then(function(r){raw=r;return decrypt(r)}).then(function(html){
+      if(remember.checked)store.set(toB64(raw));
+      show(html);
+    },function(){
+      go.disabled=false;field.classList.add('bad');
+      err.textContent='Неверный пароль. Проверьте раскладку и регистр.';
+      card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake');
+      pw.select();
+    });
+  });
+})();
+</script>
+</body>
+</html>
